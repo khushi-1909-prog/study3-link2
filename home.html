@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zyntho • Clothing</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-E6w2p..."
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet" href="styles.css" />
+   <style>
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: #ccc;
+    }
+    .divider-text {
+      padding: 0 10px;
+      color: green;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    /* POPUP STYLES */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.popup-box {
+  background: #fff;
+  padding: 22px;
+  width: 90%;
+  max-width: 360px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: popupFade 0.3s ease;
+}
+
+.popup-box h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: #333;
+}
+
+.popup-box p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.popup-box button {
+  margin-top: 15px;
+  background: royalblue;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.popup-box button:hover {
+  opacity: 0.9;
+}
+
+@keyframes popupFade {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+  </style>
+</head>
+
+
+<body>
+  <header class="navbar">
+    <button class="icon-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+    
+    <h1 class="brand">Zyntho</h1>
+    <a href="#" class="icon-btn" aria-label="Cart"><i class="fas fa-bag-shopping"></i></a>
+  </header>
+<main class="container">
+  <!-- CENTERED TOP BUTTONS -->
+  <div class="btn-group top-center">
+    <button onclick="showSection('clothing')" class="btn small" id="btn-clothing">Bags</button>
+  </div>
+   <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">Free Shipping above orders $ 10</div>
+      <div class="divider-line"></div>
+    </div>
+  
+
+
+  
+    
+  <section class="grid">
+   
+      <!-- CARD 1 -->
+      <article class="card">
+        <img src="new images/product1.jpg" alt="Classic Professional Briefcase">
+        <h3>Classic Professional Briefcase</h3>
+        <p class="price">$ 25</p>
+        <a href="striped-shirt.html" class="btn">Description</a>
+      </article>
+      <!-- CARD 2 -->
+      <article class="card">
+        <img src="new images/product2.jpg" alt="Compact Utility Waist Bag">
+        <h3>Compact Utility Waist Bag</h3>
+        <p class="price">$ 23</p>
+        <a href="denim-jacket.html" class="btn">Description</a>
+      </article>
+      <!-- CARD 3 -->
+      <article class="card">
+        <img src="new images/product3.jpg" alt="Classic Flap Multi-Pocket Backpack">
+        <h3>Classic Flap Multi-Pocket Backpack</h3>
+        <p class="price">$ 26</p>
+        <a href="yellow-dress.html" class="btn">Description</a>
+      </article>
+      <!-- CARD 4 -->
+      <article class="card">
+        <img src="new images/product4.png" alt="Compact Zip Crossbody Bag">
+        <h3>Compact Zip Crossbody Bag</h3>
+        <p class="price">$ 23</p>
+        <a href="gray-pants.html" class="btn">Description</a>
+      </article>
+       <article class="card">
+        <img src="new images/product5.jpg" alt=" Dual-Tone Convertible Backpack">
+        <h3>Dual-Tone Convertible Backpack</h3>
+        <p class="price">$ 27</p>
+        <a href="matcha.html" class="btn">Description</a>
+      </article>
+       <article class="card">
+        <img src="new images/product6.jpg" alt=" Classic Leather Laptop Briefcase">
+        <h3>Classic Leather Laptop Briefcase</h3>
+        <p class="price">$ 25</p>
+        <a href="Linen.html" class="btn">Description</a>
+      </article>
+        <article class="card">
+        <img src="new images/product7.jpg" alt=" Everyday Canvas Tote Bag">
+        <h3>Everyday Canvas Tote Bag</h3>
+        <p class="price">$ 24</p>
+        <a href="hoodie.html" class="btn">Description</a>
+      </article>
+       <article class="card">
+        <img src="new images/product8.jpg" alt=" Utility Laptop Messenger Bag">
+        <h3>Utility Laptop Messenger Bag</h3>
+        <p class="price">$ 27</p>
+        <a href="sportsPants.html" class="btn">Description</a>
+      </article>
+  </section>
+      
+  </main>
+    
+    
+    
+    <script>
+  function showSection(type) {
+    const clothing = document.getElementById("clothing");
+    if (type === "clothing") {
+      clothing.style.display = "block";
+    }
+  }
+
+  window.onload = function () {
+    const popup = document.getElementById("order-popup");
+    const closeBtn = document.getElementById("close-popup");
+
+    // Show popup on page load
+    popup.style.display = "flex";
+
+    // Close popup
+    closeBtn.onclick = function () {
+      popup.style.display = "none";
+    };
+  };
+</script>
+
+
+
+
+
+<footer class="footer">© 2025 Zyntho · All rights reserved</footer>
+<!-- POPUP -->
+<div id="order-popup" class="popup-overlay">
+  <div class="popup-box">
+    <h2>🛍️ How to Order</h2>
+    <p>
+      You can click on the  <strong>Description</strong> button to know more and place your order.
+    </p>
+    <button id="close-popup">Got it</button>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

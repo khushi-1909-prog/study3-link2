@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart • Striped T‑Shirt</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="clothing_yellowdresses.html" class="icon-btn"><i class="fas fa-arrow-left"></i></a>
+    <h1 class="brand">Your Cart</h1>
+    <span class="icon-btn badge">1</span>
+  </header>
+
+  <main class="container cart-page">
+    <section class="cart-item">
+      <img src="new images/product3.jpg" alt="Classic Flap Multi-Pocket Backpack">
+      <div>
+        <h3>Classic Flap Multi-Pocket Backpack</h3>
+        <p>Price: $ 23.40</p>
+        <p>Shipping: <span style="color: green;">Free Shipping</span></p>
+
+        <p class="total">Total: $ 23.40</p>
+      </div>
+    </section>
+
+<button onclick="postToCommunity()" class="btn full place-order">
+  Place Order
+</button>
+  </main>
+<script>
+  function postToCommunity() {
+  const productData = {
+    name: "Classic Professional Briefcase",
+    image: "new images/product3.jpg"
+  };
+
+  localStorage.setItem("selectedProduct", JSON.stringify(productData));
+
+  window.location.href = "styling-success.html";
+}
+</script>
+</body>
+</html>
+

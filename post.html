@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Page</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #f5f5f5;
+  margin: 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.post-box, .post {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+/* CLEAN BUTTON */
+button {
+  padding: 8px 18px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+  margin: 10px auto 0;
+}
+
+.post img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.actions span {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.comment-box {
+  display: none;
+  margin-top: 10px;
+}
+
+.comment-box input {
+  width: 70%;
+  padding: 5px;
+}
+
+/* POPUP */
+.modal {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.5);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content {
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Community Posts</h2>
+
+<div class="post-box">
+  <textarea id="captionInput" placeholder="Write your review..."></textarea>
+
+  <!-- ONLY PRODUCT PREVIEW -->
+  <img id="preview" style="display:none; width:100%; border-radius:10px; margin-top:10px;">
+
+  <button onclick="createPost()">Post</button>
+</div>
+
+<div id="postsContainer"></div>
+
+</div>
+
+<!-- POPUP -->
+<div class="modal" id="successModal">
+  <div class="modal-content">
+    <h3>✅ Your review is posted!</h3>
+    <button onclick="goToForm()">OK</button>
+  </div>
+</div>
+
+<script>
+
+/* ✅ 4 DEFAULT POSTS ONLY */
+const defaultPosts = [
+  {
+    username: "khushi",
+    caption: "Loving this new outfit 😍",
+    image: "https://via.placeholder.com/500",
+    likes: 2,
+    comments: []
+  },
+  {
+    username: "fashiongirl",
+    caption: "Summer vibes ☀️",
+    image: "https://via.placeholder.com/500",
+    likes: 5,
+    comments: []
+  },
+  {
+    username: "stylequeen",
+    caption: "This bag is totally worth it 💼✨",
+    image: "https://via.placeholder.com/500",
+    likes: 3,
+    comments: []
+  },
+  {
+    username: "trendsetter",
+    caption: "Minimal & classy look 🔥",
+    image: "https://via.placeholder.com/500",
+    likes: 4,
+    comments: []
+  }
+];
+
+/* LOAD POSTS */
+function loadPosts() {
+  const container = document.getElementById("postsContainer");
+  container.innerHTML = "";
+
+  let userPosts = JSON.parse(localStorage.getItem("posts")) || [];
+  let allPosts = [...userPosts, ...defaultPosts];
+
+  allPosts.forEach((postData, index) => {
+
+    const post = document.createElement("div");
+    post.className = "post";
+
+    let commentsHTML = postData.comments.map(c => `<div>${c}</div>`).join("");
+
+    post.innerHTML = `
+      <b>${postData.username}</b>
+      <div>${postData.caption}</div>
+      ${postData.image ? `<img src="${postData.image}">` : ""}
+
+      <div class="actions">
+        <span onclick="likePost(${index})">❤️ ${postData.likes}</span>
+        <span onclick="toggleComments(this)">💬 Comment</span>
+        ${index < userPosts.length ? `<span onclick="deletePost(${index})">🗑️ Delete</span>` : ""}
+      </div>
+
+      <div class="comments">${commentsHTML}</div>
+
+      <div class="comment-box">
+        <input type="text" placeholder="Add comment">
+        <button onclick="addComment(${index}, this)">Post</button>
+      </div>
+    `;
+
+    container.appendChild(post);
+  });
+}
+
+/* CREATE POST */
+function createPost() {
+  const caption = document.getElementById("captionInput").value.trim();
+  const preview = document.getElementById("preview");
+
+  if (!caption && preview.style.display !== "block") {
+    alert("Please write something!");
+    return;
+  }
+
+  if (preview.style.display === "block") {
+    savePost(caption, preview.src);
+    localStorage.removeItem("selectedProduct");
+  } else {
+    savePost(caption, null);
+  }
+
+  document.getElementById("captionInput").value = "";
+  preview.style.display = "none";
+
+  alert("✅ Your review has been posted successfully!");
+}
+
+/* SAVE POST */
+function savePost(caption, image) {
+  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+  posts.unshift({
+    username: "@you",
+    caption: caption,
+    image: image,
+    likes: 0,
+    comments: []
+  });
+
+  localStorage.setItem("posts", JSON.stringify(posts));
+  loadPosts();
+}
+
+/* LIKE */
+function likePost(index) {
+  let userPosts = JSON.parse(localStorage.getItem("posts")) || [];
+
+  if (index < userPosts.length) {
+    userPosts[index - defaultPosts.length].likes++;
+    localStorage.setItem("posts", JSON.stringify(userPosts));
+  } else {
+    defaultPosts[index].likes++;
+  }
+
+  loadPosts();
+}
+
+/* DELETE */
+function deletePost(index) {
+  let userPosts = JSON.parse(localStorage.getItem("posts")) || [];
+
+ userPosts.splice(index, 1);
+
+  localStorage.setItem("posts", JSON.stringify(userPosts));
+  loadPosts();
+}
+
+/* COMMENTS */
+function toggleComments(el) {
+  const box = el.closest('.post').querySelector('.comment-box');
+  box.style.display = box.style.display === "none" ? "block" : "block";
+}
+
+function addComment(index, btn) {
+  const input = btn.previousElementSibling;
+  const text = input.value.trim();
+  if (!text) return;
+
+  let userPosts = JSON.parse(localStorage.getItem("posts")) || [];
+
+   if (index < userPosts.length) {
+    userPosts[index - defaultPosts.length].comments.push("@you: " + text);
+    localStorage.setItem("posts", JSON.stringify(userPosts));
+  } else {
+    defaultPosts[index].comments.push("@you: " + text);
+  }
+
+  loadPosts();
+}
+
+/* ✅ PAGE LOAD ALERT */
+window.onload = function () {
+  loadPosts();
+
+  alert(
+    "Welcome to the Community Page!\n\n" +
+    "Here you can share your reviews about the products you purchased.\n\n" +
+    "⚠️ IMPORTANT: PLEASE SCROLL TO THE END OF THE PAGE."
+  );
+
+  // product auto-fill
+  const product = JSON.parse(localStorage.getItem("selectedProduct"));
+
+  if (product) {
+    document.getElementById("captionInput").value =
+      `Reviewing: ${product.name} ✨`;
+
+    const preview = document.getElementById("preview");
+    preview.src = product.image;
+    preview.style.display = "block";
+  }
+};
+
+/* ✅ SCROLL END DETECTION */
+window.onscroll = function () {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
+
+    // prevent multiple alerts
+    if (!window.reachedEnd) {
+      window.reachedEnd = true;
+
+      alert("You have reached the end.\n\nClick OK to continue to the feedback form.");
+
+      window.location.href = "https://forms.gle/YOUR_FORM_LINK";
+    }
+  }
+};
+
+</script>
+</body>
+</html>

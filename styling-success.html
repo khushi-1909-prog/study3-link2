@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Placed • Zyntho</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #fdd9b5, #fceabb);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Outer card */
+    .success-card {
+      width: 90%;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      padding: 25px;
+      text-align: center;
+      animation: popUp 0.6s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Brand Heading */
+    .brand {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin: 10px 0;
+      color: #444;
+    }
+
+    p {
+      font-size: 14px;
+      color: #555;
+      margin: 8px 0;
+    }
+
+    .order-id, .delivery {
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Promo Box */
+ /* Promo Box */
+.promo-box {
+  background: #f0f8ff; /* light background for better readability */
+  color: #333; /* dark text color */
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 16px;
+  animation: popUp 0.8s ease 0.2s;
+}
+
+
+    .promo-box h3 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+
+    .promo-box p {
+      font-size: 14px;
+      margin: 0 0 15px 0;
+    }
+
+    /* Button */
+   .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  background: #0072ff; /* make it stand out on light bg */
+  color: #fff;
+  border-radius: 25px;
+  transition: background 0.3s ease;
+}
+/* SERVICES STYLING */
+.services-box {
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+  border-radius: 18px;
+}
+
+.services-row {
+  display: flex;
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.service-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ACTIVE SERVICE */
+.service-card.active {
+  border: 2px solid #ff4081;
+  box-shadow: 0 0 18px rgba(255,64,129,0.45);
+}
+
+/* BADGES */
+.service-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.service-badge.exploring {
+  background: #ff4081;
+}
+
+.service-badge.new {
+  background: #2196f3;
+}
+
+/* TEXT */
+.service-card h4 {
+  margin: 8px 0 6px;
+  font-size: 15px;
+  color: #333;
+}
+
+.service-card p {
+  font-size: 12.5px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.redirect-text {
+  font-size: 13px;
+  margin: 10px 0 14px;
+  color: #444;
+}
+
+
+.btn:hover {
+  background: #005bb5;
+}
+
+    /* Pop-up animation */
+    @keyframes popUp {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      top: -10px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    /* SINGLE CENTERED SERVICE */
+.services-row.single {
+  justify-content: center;
+}
+
+.center-card {
+  max-width: 320px;
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+  <main class="success-card">
+    <h1 class="brand">Zyntho</h1>
+
+    <h2>🎉 Order Placed 🎉</h2>
+    <p>Your order has been placed successfully!</p>
+
+    <p class="order-id">Order <strong>#1234</strong></p>
+    <p class="delivery"><strong>Order will be delivered in next three days</strong></p>
+    <p>Thank you for shopping with us 💙</p>
+
+    <section class="promo-box services-box">
+  <h3>🚀 Newly Added Services</h3>
+
+<div class="services-row single">
+  <div class="service-card active center-card">
+    <span class="service-badge exploring">NEW</span>
+    <h4>✨ Community Post Feature</h4>
+    <p>
+       Share your Views, like posts, and connect with others.
+    </p>
+  </div>
+</div>
+
+
+  <p class="redirect-text">
+    You will now be redirected to explore our <strong>Community Page</strong>.
+  </p>
+
+  <button onclick="goToCommunity()">Continue to Community</button>
+</section>
+
+
+  </main>
+
+  <script>
+    // Confetti generator
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      document.body.appendChild(confetti);
+
+      // Random colors
+      const colors = ["#ff4081", "#ff9800", "#4caf50", "#2196f3", "#9c27b0", "#ffc107"];
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+      // Random position and size
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.width = confetti.style.height = Math.random() * 8 + 5 + "px";
+
+      // Random animation duration
+      confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+      // Remove after animation
+      setTimeout(() => {
+        confetti.remove();
+      }, 5000);
+    }
+
+    // Drop confetti every 200ms
+    setInterval(createConfetti, 200);
+  function goToCommunity() {
+  window.location.href = "post.html";
+}
+  </script>
+</body>
+</html>
+
+
+
+
+
+

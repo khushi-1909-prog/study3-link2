@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zyntho • Clothing</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-E6w2p..."
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet" href="styles.css" />
+   <style>
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: #ccc;
+    }
+    .divider-text {
+      padding: 0 10px;
+      color: green;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+        #chatbot {
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      width: 320px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      z-index: 999;
+    }
+
+    #chat-header {
+      background: royalblue;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    #chat-body {
+      height: 280px;
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+    }
+
+    .msg {
+      margin: 6px 0;
+      padding: 8px 12px;
+      border-radius: 8px;
+      max-width: 80%;
+    }
+
+    .user { 
+      background: #e1f5fe;
+      align-self: flex-end;
+    }
+
+    .bot {
+      background: #f1f1f1;
+      align-self: flex-start;
+    }
+
+    #chat-footer {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    #chat-input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    #send-btn {
+      background: royalblue;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  #faq-buttons button {
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#faq-buttons button:hover {
+  background: #e8f1ff;
+}
+/* TOP BUTTON GROUP FIX */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;          /* 🔥 allows wrapping on mobile */
+}
+
+/* SMALL BUTTON STYLE */
+.btn.small {
+  padding: 6px 10px;        /* smaller height & width */
+  font-size: 12px;
+  border-radius: 8px;
+  white-space: nowrap;      /* keeps text in one line */
+}
+.btn.small {
+  line-height: 1.2;
+}
+@media (max-width: 480px) {
+  .btn-group {
+    gap: 5px;
+  }
+
+  .btn.small {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+}
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.action-buttons button {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.next-btn {
+  background: #007bff;
+  color: #fff;
+}
+
+.exit-btn {
+  background: #28a745;
+  color: #fff;
+}
+.btn-with-badge {
+  position: relative;
+  display: inline-block;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: red;
+  color: #fff;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+/* POPUP STYLES */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.popup-box {
+  background: #fff;
+  padding: 22px;
+  width: 90%;
+  max-width: 360px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: popupFade 0.3s ease;
+}
+
+.popup-box h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: #333;
+}
+
+.popup-box p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.popup-box button {
+  margin-top: 15px;
+  background: royalblue;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.popup-box button:hover {
+  opacity: 0.9;
+}
+
+@keyframes popupFade {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+   
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <button class="icon-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+    <h1 class="brand">Zyntho</h1>
+    <a href="#" class="icon-btn" aria-label="Cart"><i class="fas fa-bag-shopping"></i></a>
+   
+
+
+  </header>
+<main class="container">
+  <!-- CENTERED TOP BUTTONS -->
+ 
+  
+    
+  <div class="btn-group top-center">
+    <button onclick="showSection('clothing')" class="btn small" id="btn-clothing">Bags</button>
+    <a href="styling.html" class="btn-with-badge">
+    <button class="btn small">Community Post</button>
+    <span class="badge">NEW</span>
+    </a>
+     
+    
+
+
+    
+  </div>
+   <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">Free Shipping above orders $ 10</div>
+      <div class="divider-line"></div>
+    </div>
+  
+
+
+  
+    
+  <section class="grid">
+   
+      <!-- CARD 1 -->
+      <article class="card">
+        <img src="new images/product1.jpg" alt=" Classic Professional Briefcase">
+        <h3> Classic Professional Briefcase</h3>
+        <p class="price">$ 25</p>
+        <a href="clothing_stripedshirt.html" class="btn">Description</a>
+      </article>
+      <!-- CARD 2 -->
+      <article class="card">
+        <img src="new images/product2.jpg" alt=" Compact Utility Waist Bag">
+        <h3> Compact Utility Waist Bag</h3>
+        <p class="price">$ 23</p>
+        <a href="clothing_denimjacket.html" class="btn">Description</a>
+      </article>
+      <!-- CARD 3 -->
+      <article class="card">
+        <img src="new images/product3.jpg" alt=" Classic Flap Multi-Pocket Backpack">
+        <h3> Classic Flap Multi-Pocket Backpack</h3>
+        <p class="price">$ 26</p>
+        <a href="clothing_yellowdresses.html" class="btn">Description</a>
+      </article>
+      <!-- CARD 4 -->
+      <article class="card">
+        <img src="new images/product4.png" alt=" Compact Zip Crossbody Bag">
+        <h3> Compact Zip Crossbody Bag</h3>
+        <p class="price">$ 23</p>
+        <a href="clothing_graypants.html" class="btn">Description</a>
+      </article>
+      <article class="card">
+        <img src="new images/product5.jpg" alt=" Dual-Tone Convertible Backpack">
+        <h3> Dual-Tone Convertible Backpack</h3>
+        <p class="price">$ 27</p>
+        <a href="clothing_matcha.html" class="btn">Description</a>
+      </article>
+       <article class="card">
+        <img src="new images/product6.jpg" alt="Classic Leather Laptop Briefcase">
+        <h3>Classic Leather Laptop Briefcase</h3>
+        <p class="price">$ 25</p>
+        <a href="clothing_linen.html" class="btn">Description</a>
+      </article>
+        <article class="card">
+        <img src="new images/product7.jpg" alt=" Everyday Canvas Tote Bag">
+        <h3> Everyday Canvas Tote Bag</h3>
+        <p class="price">$ 24</p>
+        <a href="clothing_hoodie.html" class="btn">Description</a>
+      </article>
+       <article class="card">
+        <img src="new images/product8.jpg" alt="Utility Laptop Messenger Bag">
+        <h3> Utility Laptop Messenger Bag</h3>
+        <p class="price">$ 27</p>
+        <a href="clothing_sportsPants.html" class="btn">Description</a>
+      </article>
+    </section>
+
+
+</main>
+ 
+<footer class="footer">© 2025 Zyntho · All rights reserved</footer>
+<!-- POPUP -->
+<div id="order-popup" class="popup-overlay">
+  <div class="popup-box">
+    <h2>🛍️ How to Order</h2>
+    <p>
+     You can click on the  <strong>Description</strong> button to know more and place your order.
+    </p>
+    <button id="close-popup">Got it</button>
+  </div>
+</div>
+
+</body>
+    
+    
+    
+  <script>
+
+  window.onload = function () {
+    const popup = document.getElementById("order-popup");
+    const closeBtn = document.getElementById("close-popup");
+
+    // Show popup on page load
+    popup.style.display = "flex";
+
+    // Close popup
+    closeBtn.onclick = function () {
+      popup.style.display = "none";
+    };
+  };
+
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

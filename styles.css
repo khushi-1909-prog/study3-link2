@@ -1,0 +1,365 @@
+/* =======================================================
+   1. RESET & ROOT
+   ======================================================= */
+:root {
+  --brand: #000;
+  --accent: #5d5dff;
+  --border: #d1d1d1;
+  --radius: 14px;
+  --gap: 1rem;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* =======================================================
+   2. LAYOUT HELPERS
+   ======================================================= */
+.container {
+  max-width: 1024px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.3rem 0.8rem; 
+  font-size: 0.85rem;      
+  margin-top: 0.4rem;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: var(--radius);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+.btn:hover,
+.btn:focus {
+  transform: translateY(-2px);
+}
+
+
+/* =======================================================
+   3. NAVBAR
+   ======================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.price-box {
+  display: inline-block;
+  margin: 5px 0 12px;
+}
+
+.old-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.old-amount {
+  position: relative;
+  font-weight: 700;
+  font-size: 18px;
+  color: #111;
+  padding: 0 2px;
+}
+
+/* Red bold strike */
+.old-amount::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: red;
+  transform: translateY(-50%);
+}
+
+.discount-badge {
+  display: block;
+  text-align:right;   
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #16a34a;
+  animation: pop 1.2s infinite;
+}
+
+
+.new-price {
+  font-size: 15px;
+  font-weight: bold;
+  color: #374151;
+}
+
+
+
+.brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  }
+
+/* =======================================================
+   4. PRODUCT GRID
+   ======================================================= */
+.section-title {
+  text-align: center;
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* mobile default */
+  gap: var(--gap);
+  margin-bottom: 2rem;
+}
+
+/* Breakpoints: 3‑up @ ≥ 768px, 4‑up @ ≥ 1024px */
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* =======================================================
+   5. PRODUCT CARD
+   ======================================================= */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgb(0 0 0 / 8%);
+}
+
+.card h3 {
+  font-size: 1.05rem;
+  margin: 0.5rem 0 0.25rem;
+}
+.price {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* =======================================================
+   6. FOOTER
+   ======================================================= */
+.footer {
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid var(--border);
+}
+
+/* =======================================================
+   7. SUCCESS PAGE
+   ======================================================= */
+.success-page {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background: #fafafa;
+}
+
+.success-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.75rem;
+  width: min(90%, 380px);
+  text-align: center;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+}
+
+.checkmark {
+  font-size: 3.5rem;
+  color: #29a745;    /* green tick */
+  margin: 0.5rem 0;
+}
+
+.success-card h2 {
+  margin-top: 0.5rem;
+  font-size: 1.6rem;
+}
+
+.success-card p {
+  margin-top: 0.5rem;
+}
+
+.order-id {
+  font-weight: 700;
+  margin-top: 1rem;
+}
+.delivery {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+.btn-group.top-center {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.btn-group.top-center .btn {
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border-radius: 8px;        /* Optional: rounder corners */
+  font-weight: bold;         /* Optional: bolder text */
+}
+
+.btn-with-badge {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+.btn-with-badge .btn {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-with-badge .badge {
+  position: absolute;
+  top: -8px;         /* adjust as needed */
+  right: -8px;       /* stick to top-right */
+  background: #ff4757;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  z-index: 2;        /* <-- makes sure it's above the button */
+}
+
+
+
+
+
+
+
+
+
+
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  margin-top: 2rem;
+}
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  max-width: 240px;
+}
+
+
+.sub {
+  font-size: 0.85rem;
+  color: gray;
+  margin: 0.2rem 0 0.1rem 0;
+  text-align: center;
+}
+
+.offer-tag {
+  color: royalblue;
+  font-weight: 500;
+}
+.promo-box {
+  background-color: #00aaff;
+  color: white;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 12px;
+}
+
+.promo-box h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.promo-box p {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.btn.try-now {
+  background-color: white;
+  color: #00aaff;
+}
+@keyframes pop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
