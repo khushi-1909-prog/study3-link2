@@ -234,6 +234,13 @@
   opacity: 0.9;
 }
 
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(40%);
+}
+
 @keyframes popupFade {
   from {
     transform: scale(0.9);
@@ -274,7 +281,7 @@
   ✨ Community Post
   <span class="badge">NEW</span>
   </a>
-  <a href="styling.html" class="btn small btn-with-badge" id="video-btn">
+ <a href="styling.html" class="btn small btn-with-badge" id="styling-btn">
   ✨Styling
  <span class="badge">NEW</span>
  </a>
@@ -370,19 +377,31 @@
     
     
   <script>
+<script>
+window.onload = function () {
 
-  window.onload = function () {
-    const popup = document.getElementById("order-popup");
-    const closeBtn = document.getElementById("close-popup");
+  const popup = document.getElementById("order-popup");
+  const closeBtn = document.getElementById("close-popup");
 
-    // Show popup on page load
-    popup.style.display = "flex";
+  // Show popup
+  popup.style.display = "flex";
 
-    // Close popup
-    closeBtn.onclick = function () {
-      popup.style.display = "none";
-    };
+  // Close popup
+  closeBtn.onclick = function () {
+    popup.style.display = "none";
   };
+
+  // 🔥 Disable Styling button if coming from intro2.html
+  const params = new URLSearchParams(window.location.search);
+
+  const stylingBtn = document.getElementById("styling-btn");
+
+  if (params.get("from") === "intro") {
+    stylingBtn.classList.add("disabled");
+  }
+
+};
+</script>
 
 
 
